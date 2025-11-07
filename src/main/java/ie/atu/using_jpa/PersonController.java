@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/persons")
@@ -21,5 +22,11 @@ public class PersonController {
     @GetMapping("/{id}")
     public Person byEmployeeId(@PathVariable String id) {
         return service.findByEmployeeId(id);
+    }
+
+    @PutMapping("/api/persons{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Person update(@PathVariable String id, @Valid @RequestBody Person person){
+        return service.updatePersonById(id, person);
     }
 }
